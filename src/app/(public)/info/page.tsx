@@ -4,7 +4,7 @@ import React from "react";
 import { Clock, MapPin, Phone, MessageSquare, Navigation, Instagram, Globe } from "lucide-react";
 import { useLang } from "@/providers/app-provider";
 import { Logo } from "@/components/layout/logo";
-import { getImageUrl } from "@/lib/utils";
+import { getImageUrl, getAssetPath } from "@/lib/utils";
 
 export default function InfoPage() {
   const { ar } = useLang();
@@ -15,7 +15,7 @@ export default function InfoPage() {
       {/* Hero */}
       <div className="relative h-48 md:h-64 gradient-espresso-lounge overflow-hidden">
         <img
-          src="/brand/interior-fountain.jpg"
+          src={getAssetPath("/brand/interior-fountain.jpg")}
           alt="Bitrina Café & Lounge Interior Fountain"
           className="w-full h-full object-cover opacity-75 mix-blend-overlay"
         />

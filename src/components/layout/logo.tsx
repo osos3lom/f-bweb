@@ -1,4 +1,5 @@
 import React from "react";
+import { getAssetPath } from "@/lib/utils";
 
 export function BitrinaIcon({
   size = 28,
@@ -9,7 +10,7 @@ export function BitrinaIcon({
 }) {
   return (
     <img
-      src="/brand/logo.png"
+      src={getAssetPath("/brand/logo.png")}
       alt="قهوة بترينا - Bitrina Logo"
       width={size}
       height={size}
@@ -32,7 +33,7 @@ export function Logo({
         style={{ width: compact ? 42 : 52, height: compact ? 42 : 52 }}
       >
         <img
-          src="/brand/logo.png"
+          src={getAssetPath("/brand/logo.png")}
           alt="قهوة بترينا - Bitrina"
           className="w-full h-full object-contain"
         />

@@ -3,6 +3,7 @@ import { AppProvider } from "@/providers/app-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://bitrina.sa"),
   title: "Bitrina | بترينا —  Coffee & Dining Showcase",
   description:
     "Bitrina Café & Lounge in Al Zahra, Jeddah.  coffee, artisanal vitrine pastries, tarwiqa breakfast, oriental grills & dining lounge.",

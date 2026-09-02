@@ -3,6 +3,7 @@
 import React from "react";
 import { Logo } from "@/components/layout/logo";
 import { useLang } from "@/providers/app-provider";
+import { getAssetPath } from "@/lib/utils";
 
 export function HeroSection() {
   const { toggleLang, t } = useLang();
@@ -17,7 +18,7 @@ export function HeroSection() {
         playsInline
         className="absolute inset-0 w-full h-full object-cover scale-100 opacity-100"
       >
-        <source src="/brand/hero-bg.mp4" type="video/mp4" />
+        <source src={getAssetPath("/brand/hero-bg.mp4")} type="video/mp4" />
       </video>
 
       {/* Subtle top gradient for header legibility */}
@@ -52,7 +53,7 @@ export function HeroSection() {
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 pb-12 text-center">
         <div className="max-w-[280px] w-full transition-transform hover:scale-105">
           <img
-            src="/brand/logo.png"
+            src={getAssetPath("/brand/logo.png")}
             alt="قهوة بترينا - Bitrina Logo"
             className="w-full h-auto object-contain drop-shadow-[0_12px_30px_rgba(0,0,0,0.65)]"
           />

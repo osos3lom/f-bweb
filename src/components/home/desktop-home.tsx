@@ -9,7 +9,7 @@ import { MENU } from "@/data/menu";
 import { CATEGORIES } from "@/data/categories";
 import { MenuItem } from "@/types/menu";
 import { useCart, useLang } from "@/providers/app-provider";
-import { getImageUrl, isDrinkCategory } from "@/lib/utils";
+import { getImageUrl, getAssetPath, isDrinkCategory } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ItemModal } from "@/components/menu/item-modal";
 import { getItemName, getItemDesc, getCategoryName, formatCurrency } from "@/lib/i18n-helpers";
@@ -40,7 +40,7 @@ export function DesktopHome() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover scale-100 opacity-100"
         >
-          <source src="/brand/hero-bg.mp4" type="video/mp4" />
+          <source src={getAssetPath("/brand/hero-bg.mp4")} type="video/mp4" />
         </video>
 
         {/* Minimal gradient overlays for legibility */}
@@ -66,7 +66,7 @@ export function DesktopHome() {
           {/* Official Calligraphic Logo Emblem replacing text block */}
           <div className="my-6 mx-auto max-w-md transition-transform hover:scale-105">
             <img
-              src="/brand/logo.png"
+              src={getAssetPath("/brand/logo.png")}
               alt="قهوة بترينا - Bitrina Logo"
               className="w-full h-auto object-contain mx-auto drop-shadow-[0_12px_30px_rgba(0,0,0,0.65)]"
             />
@@ -245,7 +245,7 @@ export function DesktopHome() {
             <div className="relative">
               <div className="rounded-3xl overflow-hidden border-4 border-white/20 shadow-2xl">
                 <img
-                  src="/brand/exterior.jpg"
+                  src={getAssetPath("/brand/exterior.jpg")}
                   alt="Bitrina Coffee Exterior Facade & Lounge"
                   className="w-full h-[480px] object-cover"
                 />
@@ -258,7 +258,7 @@ export function DesktopHome() {
             <div className="rounded-2xl overflow-hidden border border-white/15 bg-white/5 p-3">
               <div className="h-56 rounded-xl overflow-hidden mb-3">
                 <img
-                  src="/brand/exterior.jpg"
+                  src={getAssetPath("/brand/exterior.jpg")}
                   alt="Bitrina Main Facade & Signboard"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -274,7 +274,7 @@ export function DesktopHome() {
             <div className="rounded-2xl overflow-hidden border border-white/15 bg-white/5 p-3">
               <div className="h-56 rounded-xl overflow-hidden mb-3">
                 <img
-                  src="/brand/interior-fountain.jpg"
+                  src={getAssetPath("/brand/interior-fountain.jpg")}
                   alt="Bitrina Indoor Lounge & Water Fountain"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
@@ -290,7 +290,7 @@ export function DesktopHome() {
             <div className="rounded-2xl overflow-hidden border border-white/15 bg-white/5 p-3">
               <div className="h-56 rounded-xl overflow-hidden mb-3">
                 <img
-                  src="/brand/outdoor-lounge.jpg"
+                  src={getAssetPath("/brand/outdoor-lounge.jpg")}
                   alt="Bitrina Outdoor Terrace Lounge"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
