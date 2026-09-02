@@ -1,0 +1,25 @@
+# dependencies
+/node_modules
+/.pnpm-store
+
+# Next.js & build outputs
+/.next/
+/out/
+/dist/
+/build
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# local env files
+.env
+.env*.local
+
+# vercel & IDEs
+.vercel
+.DS_Store
+*.tsbuildinfo
+*.pem
