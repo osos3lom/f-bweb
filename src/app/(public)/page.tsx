@@ -44,7 +44,7 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col text-start">
                 <span className="text-sm font-bold text-white tracking-wide">{ar ? "تصفح قائمة الطعام" : "Explore Showcase Menu"}</span>
-                <span className="text-[11px] text-white/70 font-normal">{ar ? "حلويات فاخرة · مأكولات · قهوة مختصة" : "Pastries · Gourmet Lounge · Specialty Coffee"}</span>
+                <span className="text-[11px] text-white/70 font-normal">{ar ? "حلويات فاخرة · مأكولات · قهوة مختصة" : "Pastries · Gourmet Lounge ·  Coffee"}</span>
               </div>
             </div>
 
@@ -84,7 +84,7 @@ export default function HomePage() {
             </div>
             <div className="flex flex-col items-center gap-1 border-x border-[#E8DFC5]">
               <Coffee size={15} className="text-[#D4A359]" />
-              <span className="text-[10px] font-semibold text-[#3B2319]">{ar ? "قهوة مختصة" : "Specialty Coffee"}</span>
+              <span className="text-[10px] font-semibold text-[#3B2319]">{ar ? "قهوة مختصة" : " Coffee"}</span>
             </div>
             <div className="flex flex-col items-center gap-1">
               <UtensilsCrossed size={15} className="text-[#D4A359]" />

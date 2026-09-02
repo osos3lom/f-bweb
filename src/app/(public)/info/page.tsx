@@ -37,7 +37,7 @@ export default function InfoPage() {
           <p className="text-sm md:text-base text-muted-foreground leading-relaxed whitespace-pre-line">
             {ar
               ? "بيترّينا هي بذاتها خزانة ستي وستّك، يلي كان ممنوع حدا يدقرها، لإن عقولتهم: (فيها أشياء ثمينة)، بخافوا تنكسر\n\nلهيك اليوم، أنا وأنت صار عنا بيترّينا خاصة فينا، مليانة أشياء ثمينة، إيه وما بتنكسر\nبس مثل شو؟"
-              : "Bitrina stems from the artisanal 'Vitrine' glass display showcase—curating specialty coffee beans, exquisite pastries, and gourmet lounge meals with transparent elegance in Al Zahra, Jeddah."}
+              : "Bitrina stems from the artisanal 'Vitrine' glass display showcase—curating  coffee beans, exquisite pastries, and gourmet lounge meals with transparent elegance in Al Zahra, Jeddah."}
           </p>
         </div>
 

@@ -252,6 +252,14 @@
   display: none;
 }
 
+body.hide-mobile-nav .mobile-bottom-nav {
+  display: none !important;
+}
+
+body.hide-mobile-nav main {
+  padding-bottom: 0 !important;
+}
+
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }

@@ -11,12 +11,12 @@ export const translations = {
     "nav.dashboard": "لوحة التحكم",
     "nav.order": "الطلب",
     "nav.info": "عن بترينا",
-    "nav.lang_toggle": "العربية | EN",
+    "nav.lang_toggle": "EN",
 
     // Hero & Home Section
     "hero.tagline": "قهوة مختصة ولاونج",
     "hero.title": "أناقة الضيافة والمذاق",
-    "hero.subtitle": "استمتع بتجربة قهوة بترينا المختصة، المأكولات الفاخرة والحلويات في قلب جدة",
+    "hero.subtitle": "استمتع بتجربة قهوة بترينا المختصة، المأكولات والحلويات في قلب جدة",
     "hero.explore_menu": "المنيو",
     "hero.cta_menu": "المنيو",
     "hero.cta_offers": "العروض",
@@ -79,10 +79,10 @@ export const translations = {
     "nav.dashboard": "Dashboard",
     "nav.order": "Order",
     "nav.info": "About",
-    "nav.lang_toggle": "EN | عربي",
+    "nav.lang_toggle": "عربي",
 
     // Hero & Home Section
-    "hero.tagline": "Specialty Coffee & Lounge",
+    "hero.tagline": " Coffee & Lounge",
     "hero.title": "Artisanal Coffee & Dining",
     "hero.subtitle": "Experience Bitrina’s signature roasted coffee, artisanal vitrine pastries & luxury lounge dining in Jeddah",
     "hero.explore_menu": "Menu",
@@ -103,7 +103,7 @@ export const translations = {
     // Story & Info
     "about.title": "The Story of Bitrina",
     "about.heading": "Inspired by the Elegance of the Vitrine Showcase",
-    "about.p1": "The name Bitrina stems from the artisanal 'Vitrine' glass display showcase—curating specialty coffee beans, exquisite pastries, and gourmet lounge meals with transparent elegance.",
+    "about.p1": "The name Bitrina stems from the artisanal 'Vitrine' glass display showcase—curating  coffee beans, exquisite pastries, and gourmet lounge meals with transparent elegance.",
     "about.p2": "Located in Al Zahra, Jeddah, Bitrina brings together coffee connoisseurs, food lovers, and lounge guests in a warm, sophisticated ambience.",
     "info.opening_hours": "Opening Hours",
     "info.daily_hours": "Open daily: 7:00 AM – 1:00 AM",

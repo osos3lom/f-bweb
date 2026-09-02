@@ -10,9 +10,20 @@ export function BottomNav() {
   const pathname = usePathname();
   const { cartCount } = useCart();
   const { t } = useLang();
+  const [hidden, setHidden] = React.useState(false);
 
-  // If in dashboard, do not show public bottom nav
-  if (pathname?.startsWith("/dashboard")) return null;
+  React.useEffect(() => {
+    const checkHidden = () => {
+      setHidden(document.body.classList.contains("hide-mobile-nav"));
+    };
+    checkHidden();
+    const observer = new MutationObserver(checkHidden);
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
+  // If in dashboard or reels mode, do not render public bottom nav
+  if (hidden || pathname?.startsWith("/dashboard")) return null;
 
   const tabs = [
     { href: "/", icon: <Home size={19} />, label: t("nav.home") },
@@ -22,7 +33,7 @@ export function BottomNav() {
   ];
 
   return (
-    <div className="md:hidden fixed bottom-4 left-4 right-4 z-40 max-w-md mx-auto pointer-events-none">
+    <div className="mobile-bottom-nav md:hidden fixed bottom-4 left-4 right-4 z-40 max-w-md mx-auto pointer-events-none">
       <nav
         className="pointer-events-auto flex items-center justify-around px-2 py-2 rounded-full border border-white/70 shadow-[0_12px_40px_rgba(59,35,25,0.18)] transition-all duration-300 gradient-vitrine-glass"
       >

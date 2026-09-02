@@ -1,17 +1,58 @@
 import { MenuCategory } from "@/types/menu";
 
 export const CATEGORIES: MenuCategory[] = [
-  { id: "coffee", name: "Specialty Coffee", nameAr: "قهوة مختصة", emoji: "☕" },
-  { id: "tarwiqa", name: "Tarwiqa Breakfast", nameAr: "ترويقة الفطور", emoji: "🍳" },
-  { id: "cold-mezze", name: "Cold Mezze", nameAr: "مقبلات باردة", emoji: "🫙" },
-  { id: "hot-mezze", name: "Hot Mezze", nameAr: "مقبلات ساخنة", emoji: "🔥" },
-  { id: "salads", name: "Fresh Salads", nameAr: "سلطات طازجة", emoji: "🥗" },
-  { id: "manakish", name: "Vitrine Mana'eesh", nameAr: "مناقيش البترينا", emoji: "🫓" },
-  { id: "sandwiches", name: "Artisanal Sandwiches", nameAr: "سندويشات فاخرة", emoji: "🥙" },
-  { id: "grills", name: "Oriental Grills", nameAr: "مشاوي بترينا", emoji: "🍖" },
-  { id: "mains", name: "Main Dishes", nameAr: "أطباق رئيسية", emoji: "🍽️" },
-  { id: "pasta", name: "Pastas & Risotto", nameAr: "باستا وريزوتو", emoji: "🍝" },
-  { id: "desserts", name: "Vitrine Desserts", nameAr: "حلويات البترينا", emoji: "🍮" },
-  { id: "juices", name: "Fresh Juices & Mocktails", nameAr: "عصائر وموكتيل", emoji: "🥤" },
-  { id: "lounge", name: "Lounge & Drinks", nameAr: "مشروبات ومشروبات ساخنة", emoji: "🫖" },
+  {
+    "id": "daytime-offers",
+    "name": "Special Offers & Combos",
+    "nameAr": "عروض بترينا",
+    "emoji": "☀️"
+  },
+  {
+    "id": "starters-mezze",
+    "name": "Starters, Soups & Mezze",
+    "nameAr": "المقبلات والسلطات",
+    "emoji": "🥗"
+  },
+  {
+    "id": "oven-bakery",
+    "name": "Bitrina Oven & Pizza",
+    "nameAr": "أفران بترينا والبيتزا",
+    "emoji": "🔥"
+  },
+  {
+    "id": "mains-pasta",
+    "name": "Main Courses & Pasta",
+    "nameAr": "الأطباق الرئيسية والباستا",
+    "emoji": "🍽️"
+  },
+  {
+    "id": "grills",
+    "name": "Charcoal Grills & BBQ",
+    "nameAr": "المشاوي",
+    "emoji": "🍖"
+  },
+  {
+    "id": "desserts",
+    "name": "Desserts & Sweets",
+    "nameAr": "الحلويات",
+    "emoji": "🍰"
+  },
+  {
+    "id": "coffee-tea",
+    "name": "Coffee & Tea Bar",
+    "nameAr": "القهوة والشاي",
+    "emoji": "☕"
+  },
+  {
+    "id": "cold-refreshments",
+    "name": "Cold Juices & Refreshers",
+    "nameAr": "العصائر والمشروبات الباردة",
+    "emoji": "🍹"
+  },
+  {
+    "id": "shisha",
+    "name": "Shisha & Lounge",
+    "nameAr": "الشيشة والجلسات",
+    "emoji": "💨"
+  }
 ];

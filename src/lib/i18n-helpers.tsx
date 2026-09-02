@@ -37,7 +37,7 @@ export function getCategoryName(category: MenuCategory, lang: Lang): string {
  * Formats currency amount in SAR using the official SAR symbol icon.
  */
 export function formatCurrency(amount: number, lang: Lang = "ar"): React.ReactNode {
-  const num = lang === "ar" ? Math.round(amount * 3.75) : Math.round(amount * 3.75);
+  const num = Number.isInteger(amount) ? amount : amount.toFixed(1);
 
   return (
     <span className="inline-flex items-baseline gap-1">

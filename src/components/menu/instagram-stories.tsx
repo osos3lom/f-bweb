@@ -27,7 +27,7 @@ export function InstagramStories({
       ref={storiesRef}
       className={`flex gap-3 px-3 py-2 overflow-x-auto scrollbar-none rounded-2xl transition-all ${
         isDark
-          ? "bg-black/40 backdrop-blur-md border border-white/10"
+          ? "bg-transparent border-0"
           : "bg-white/80 backdrop-blur-xs border border-[#E8DFC5]/60"
       }`}
       style={{ scrollbarWidth: "none" }}
@@ -62,12 +62,12 @@ export function InstagramStories({
               </div>
             </div>
             <span
-              className={`text-[10px] font-poppins font-medium truncate max-w-[64px] ${
+              className={`text-[10px] font-poppins tracking-wide whitespace-nowrap px-2.5 py-0.5 rounded-full transition-all max-w-[96px] truncate shadow-md ${
                 active
-                  ? "text-[#D4A359] font-bold"
+                  ? "bg-[#D4A359] text-[#1C120D] font-black border border-[#D4A359]"
                   : isDark
-                  ? "text-white/70 hover:text-white"
-                  : "text-[#78675D]"
+                  ? "bg-black/65 backdrop-blur-md text-white/95 font-bold border border-white/20 hover:border-[#D4A359]/60 hover:text-[#D4A359]"
+                  : "bg-white/90 backdrop-blur-md text-[#3B2319] font-bold border border-[#E8DFC5]"
               }`}
             >
               {getCategoryName(cat, lang)}

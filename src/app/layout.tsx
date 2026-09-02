@@ -3,11 +3,11 @@ import { AppProvider } from "@/providers/app-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Bitrina | بترينا — Specialty Coffee & Dining Showcase",
+  title: "Bitrina | بترينا —  Coffee & Dining Showcase",
   description:
-    "Bitrina Café & Lounge in Al Zahra, Jeddah. Specialty coffee, artisanal vitrine pastries, tarwiqa breakfast, oriental grills & dining lounge.",
+    "Bitrina Café & Lounge in Al Zahra, Jeddah.  coffee, artisanal vitrine pastries, tarwiqa breakfast, oriental grills & dining lounge.",
   openGraph: {
-    title: "Bitrina | بترينا — Specialty Coffee & Dining Showcase",
+    title: "Bitrina | بترينا —  Coffee & Dining Showcase",
     description: "Bitrina Café & Lounge in Al Zahra, Jeddah, Saudi Arabia.",
     url: "https://bitrina.sa",
     siteName: "Bitrina Café & Lounge",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
         url: "/menu-images/hummus.jpg",
         width: 800,
         height: 600,
-        alt: "Bitrina Specialty Coffee & Lounge",
+        alt: "Bitrina  Coffee & Lounge",
       },
     ],
     locale: "en_US",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bitrina | بترينا — Specialty Coffee & Dining Showcase",
+    title: "Bitrina | بترينا —  Coffee & Dining Showcase",
     description: "Bitrina Café & Lounge in Al Zahra, Jeddah, Saudi Arabia.",
   },
   robots: {

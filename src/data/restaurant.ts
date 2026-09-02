@@ -3,7 +3,7 @@ import { Restaurant } from "@/types/restaurant";
 export const RESTAURANT: Restaurant = {
   name: "Bitrina",
   nameAr: "بترينا",
-  tagline: "Specialty Coffee & Dining Showcase",
+  tagline: " Coffee & Dining Showcase",
   taglineAr: "أناقة الضيافة وعروبة المذاق",
   phone: "+966 59 039 3906",
   location: "Khalil Beg Al Ajan St, Al Zahra, Jeddah, KSA",

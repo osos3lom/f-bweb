@@ -51,7 +51,7 @@ export function OrderCard({
           )}
         </div>
         <span className="font-bold text-[#C89B3C] text-sm inline-flex items-baseline gap-1">
-          <span>{Math.round(order.total * 3.75)}</span> <SarIcon size="0.85em" />
+          <span>{order.total}</span> <SarIcon size="0.85em" />
         </span>
       </div>
 
@@ -62,7 +62,7 @@ export function OrderCard({
               {item.qty}x {item.name} <span className="font-cairo text-muted-foreground">({item.nameAr})</span>
             </span>
             <span className="text-muted-foreground inline-flex items-baseline gap-1">
-              <span>{Math.round(item.price * item.qty * 3.75)}</span> <SarIcon size="0.85em" />
+              <span>{item.price * item.qty}</span> <SarIcon size="0.85em" />
             </span>
           </div>
         ))}

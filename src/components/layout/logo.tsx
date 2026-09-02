@@ -55,7 +55,7 @@ export function Logo({
               light ? "text-white/75" : "text-[#8C6D58]"
             }`}
           >
-            Specialty Coffee & Lounge
+             Coffee & Lounge
           </div>
         )}
       </div>

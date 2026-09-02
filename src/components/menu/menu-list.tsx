@@ -6,21 +6,22 @@ import { CATEGORIES } from "@/data/categories";
 import { MenuItem } from "@/types/menu";
 import { useLang, useCart } from "@/providers/app-provider";
 import { InstagramStories } from "./instagram-stories";
-import { InstagramCard } from "./instagram-card";
 import { InstagramGridCard } from "./instagram-grid-card";
+import { CategoryGridCard } from "./category-grid-card";
 import { InstagramReelCard } from "./instagram-reel-card";
 import { MenuSearch } from "./menu-search";
 import { ItemModal } from "./item-modal";
 import { getCategoryName } from "@/lib/i18n-helpers";
-import { Grid, LayoutList, Sparkles, Instagram, Search, Film, Maximize2, Minimize2 } from "lucide-react";
+import { Grid, Sparkles, Instagram, Search, ArrowLeft, ArrowRight } from "lucide-react";
 
 export function MenuList() {
-  const { lang, toggleLang, ar } = useLang();
+  const { lang, toggleLang, ar, t } = useLang();
   const { addToCart } = useCart();
-  const [activeCat, setActiveCat] = useState("coffee");
+  const [activeCat, setActiveCat] = useState("daytime-offers");
+  const [gridCategory, setGridCategory] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
-  const [viewMode, setViewMode] = useState<"reels" | "grid" | "feed">("reels");
+  const [viewMode, setViewMode] = useState<"reels" | "grid">("grid");
   const [showSearchModal, setShowSearchModal] = useState(false);
   const [activeReelIndex, setActiveReelIndex] = useState(0);
 
@@ -57,16 +58,57 @@ export function MenuList() {
     }
   };
 
-  // Category change handler
+  // Category change & launch reels handler
   const handleSelectCategory = (catId: string) => {
     setActiveCat(catId);
+    setGridCategory(catId);
     setActiveReelIndex(0);
+    setViewMode("reels");
     if (containerRef.current) {
       containerRef.current.scrollTop = 0;
     }
   };
 
-  // Keyboard Up/Down arrow navigation for Reels
+  const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches[0]) {
+      touchStartRef.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        time: Date.now(),
+      };
+    }
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStartRef.current || !e.changedTouches[0]) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartRef.current.x;
+    const deltaY = e.changedTouches[0].clientY - touchStartRef.current.y;
+    const duration = Date.now() - touchStartRef.current.time;
+
+    touchStartRef.current = null;
+
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+
+    if (absX > 60 && absX > absY * 1.3 && duration < 650) {
+      setViewMode("grid");
+    }
+  };
+
+  // Keyboard Up/Down arrow navigation for Reels & Mobile Nav toggle
+  useEffect(() => {
+    if (viewMode === "reels") {
+      document.body.classList.add("hide-mobile-nav");
+    } else {
+      document.body.classList.remove("hide-mobile-nav");
+    }
+    return () => {
+      document.body.classList.remove("hide-mobile-nav");
+    };
+  }, [viewMode]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (viewMode !== "reels" || selectedItem) return;
@@ -83,15 +125,19 @@ export function MenuList() {
   }, [viewMode, activeReelIndex, displayItems.length, selectedItem]);
 
   return (
-    <div className="relative w-full min-h-screen bg-[#0D0805] text-white overflow-hidden select-none flex flex-col items-center justify-center">
+    <div className="relative w-full min-h-screen bg-[#1C120D] text-white overflow-hidden select-none flex flex-col items-center justify-center">
       {/* Background Ambient Luxury Glow */}
-      <div className="absolute inset-0 bg-radial from-[#3B2319]/30 via-[#1C120D]/80 to-[#0D0805] pointer-events-none" />
+      <div className="absolute inset-0 bg-radial from-[#5A3A2B]/40 via-[#251812]/80 to-[#1C120D] pointer-events-none" />
 
       {/* Main Container Phone Canvas / Widescreen Container */}
-      <div className="relative w-full max-w-md md:max-w-md h-[100dvh] md:h-[86vh] md:max-h-[850px] md:my-auto md:rounded-3xl md:border md:border-[#D4A359]/30 md:shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden bg-[#0D0805]">
+      <div className="relative w-full max-w-md md:max-w-md h-[100dvh] md:h-[86vh] md:max-h-[850px] md:my-auto md:rounded-3xl md:border md:border-[#D4A359]/30 md:shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden bg-[#1C120D]">
         
         {/* ── 1. Top Glass Header Overlay (Floating Header) ── */}
-        <header className="absolute top-0 inset-x-0 z-30 bg-gradient-to-b from-black/90 via-black/60 to-transparent pb-3 pt-3 px-4 backdrop-blur-xs">
+        <header className={`absolute top-0 inset-x-0 z-30 pb-3 pt-3 px-4 transition-all ${
+          viewMode === "reels"
+            ? "bg-gradient-to-b from-black/90 via-black/50 to-transparent"
+            : "bg-[#1C120D] border-b border-[#D4A359]/30 shadow-md"
+        }`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               {/* Left Brand Badge */}
@@ -108,7 +154,7 @@ export function MenuList() {
                     </span>
                     <Sparkles size={12} className="text-[#D4A359] fill-[#D4A359]" />
                   </div>
-                  <span className="text-[10px] text-white/70 font-medium">
+                  <span className="text-[10px] text-white/80 font-medium drop-shadow-md">
                     {ar ? "قائمة بترينا الرقمية • ريلز" : "Bitrina Reels Showcase"}
                   </span>
                 </div>
@@ -119,58 +165,31 @@ export function MenuList() {
                 {/* Search Toggle Button */}
                 <button
                   onClick={() => setShowSearchModal(!showSearchModal)}
-                  className="p-1.5 rounded-full bg-white/10 backdrop-blur-md text-white border border-white/15 hover:bg-white/20 transition-all active:scale-95"
+                  className="p-1.5 rounded-full bg-white/10 text-white border border-white/20 hover:bg-white/20 transition-all active:scale-95 shadow-md"
                   aria-label="Search Menu"
                 >
                   <Search size={14} />
                 </button>
 
-                {/* View Switcher Pills */}
-                <div className="flex items-center gap-1 bg-black/50 backdrop-blur-md p-1 rounded-full border border-white/15">
-                  <button
-                    onClick={() => setViewMode("reels")}
-                    className={`p-1.5 rounded-full transition-all ${
-                      viewMode === "reels"
-                        ? "bg-[#D4A359] text-[#1C120D] shadow-md"
-                        : "text-white/70 hover:text-white"
-                    }`}
-                    aria-label="Reels Fullscreen View"
-                    title="Reels / TikTok View"
-                  >
-                    <Film size={14} />
-                  </button>
+                {/* Back to Categories Button (Only visible in Reels mode) */}
+                {viewMode === "reels" && (
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-1.5 rounded-full transition-all ${
-                      viewMode === "grid"
-                        ? "bg-[#D4A359] text-[#1C120D] shadow-md"
-                        : "text-white/70 hover:text-white"
-                    }`}
-                    aria-label="Grid View"
-                    title="Grid View"
+                    className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#D4A359] border border-[#D4A359]/40 hover:bg-black/80 transition-all active:scale-95 shadow-md text-xs font-bold"
+                    aria-label="Back to Categories"
+                    title={ar ? "العودة لأقسام القائمة" : "Back to Categories"}
                   >
-                    <Grid size={14} />
+                    <Grid size={13} />
+                    <span>{ar ? "الأقسام" : "Categories"}</span>
                   </button>
-                  <button
-                    onClick={() => setViewMode("feed")}
-                    className={`p-1.5 rounded-full transition-all ${
-                      viewMode === "feed"
-                        ? "bg-[#D4A359] text-[#1C120D] shadow-md"
-                        : "text-white/70 hover:text-white"
-                    }`}
-                    aria-label="Cards Feed View"
-                    title="Classic Post Cards View"
-                  >
-                    <LayoutList size={14} />
-                  </button>
-                </div>
+                )}
 
                 {/* Language Switcher */}
                 <button
                   onClick={toggleLang}
-                  className="font-poppins text-xs font-bold px-2.5 py-1 rounded-full border border-[#D4A359]/50 bg-black/40 text-[#D4A359] backdrop-blur-md transition-all active:scale-95"
+                  className="font-poppins text-xs font-bold px-2.5 py-1 rounded-full border border-[#D4A359]/50 bg-white/10 text-[#D4A359] transition-all active:scale-95 shadow-md"
                 >
-                  {lang === "ar" ? "EN" : "عربي"}
+                  {t("nav.lang_toggle")}
                 </button>
               </div>
             </div>
@@ -199,6 +218,8 @@ export function MenuList() {
           /* Full Screen Snap Scroll TikTok / Instagram Reels Feed */
           <main
             ref={containerRef}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
             className="w-full h-full snap-y snap-mandatory scroll-smooth overflow-y-auto scrollbar-none"
           >
             {displayItems.length > 0 ? (
@@ -212,6 +233,7 @@ export function MenuList() {
                   isEager={idx < 2}
                   onNavigateNext={() => scrollToIndex(idx + 1)}
                   onNavigatePrev={() => scrollToIndex(idx - 1)}
+                  onBackToCategories={() => setViewMode("grid")}
                 />
               ))
             ) : (
@@ -227,28 +249,20 @@ export function MenuList() {
             )}
           </main>
         ) : (
-          /* Grid or Feed Scrollable View */
-          <main className="w-full h-full pt-36 pb-24 px-4 overflow-y-auto bg-[#FAF6F0] text-[#2B1D16]">
+          /* Grid Scrollable View */
+          <main
+            className="w-full h-full pt-20 pb-24 overflow-y-auto bg-[#FAF6F0] text-[#2B1D16] px-0"
+          >
             {allSearched && (
-              <div className="font-poppins text-xs font-medium text-[#8C6D58] mb-4">
+              <div className="font-poppins text-xs font-medium text-[#8C6D58] mb-4 px-4">
                 {allSearched.length} {lang === "ar" ? "نتيجة بحث لـ" : "results for"} "{search}"
               </div>
             )}
 
-            {viewMode === "feed" ? (
-              <div className="flex flex-col gap-5">
-                {displayItems.map((item, index) => (
-                  <InstagramCard
-                    key={item.id}
-                    item={item}
-                    onSelect={setSelectedItem}
-                    isEager={index < 3}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="grid grid-cols-3 gap-2">
-                {displayItems.map((item, index) => (
+            {allSearched ? (
+              /* Search Results Item Grid */
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-0">
+                {allSearched.map((item, index) => (
                   <InstagramGridCard
                     key={item.id}
                     item={item}
@@ -257,6 +271,76 @@ export function MenuList() {
                   />
                 ))}
               </div>
+            ) : gridCategory === null ? (
+              /* Level 1: Menu Categories Grid (Side by side, zero gap, no rounded corners) */
+              <div className="animate-in fade-in duration-300">
+                <div className="mb-3 px-3 flex items-center justify-between">
+                  <h2 className="font-playfair text-base font-bold text-[#3B2319]">
+                    {ar ? "أقسام القائمة" : "Menu Categories"}
+                  </h2>
+                  <span className="text-xs text-[#8C6D58] font-medium">
+                    {CATEGORIES.length} {ar ? "قسم" : "categories"}
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-0">
+                  {CATEGORIES.map((cat) => {
+                    const categoryItems = MENU.filter((item) => item.category === cat.id);
+                    const coverPhoto = categoryItems[0]?.photo;
+                    return (
+                      <CategoryGridCard
+                        key={cat.id}
+                        category={cat}
+                        itemCount={categoryItems.length}
+                        coverPhoto={coverPhoto}
+                        onSelect={(catId) => handleSelectCategory(catId)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              /* Level 2: Items in Selected Category with Back Button */
+              (() => {
+                const selectedCatObj = CATEGORIES.find((c) => c.id === gridCategory);
+                const categoryItems = MENU.filter((item) => item.category === gridCategory);
+
+                return (
+                  <div className="animate-in fade-in slide-in-from-right-4 duration-300">
+                    {/* Category Navigation Bar & Back Button */}
+                    <div className="mb-3 px-3 flex items-center justify-between gap-2 pb-2 border-b border-[#E8DFC5]">
+                      <button
+                        onClick={() => setGridCategory(null)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1C120D] text-[#D4A359] text-xs font-bold shadow-md hover:bg-[#3B2319] transition-all active:scale-95 cursor-pointer"
+                      >
+                        {ar ? <ArrowRight size={15} /> : <ArrowLeft size={15} />}
+                        <span>{ar ? "العودة للأقسام" : "Back to Categories"}</span>
+                      </button>
+
+                      {selectedCatObj && (
+                        <div className="flex items-center gap-1.5 font-playfair font-bold text-sm text-[#3B2319]">
+                          <span>{selectedCatObj.emoji}</span>
+                          <span>{getCategoryName(selectedCatObj, lang)}</span>
+                          <span className="text-xs text-[#8C6D58] font-normal">
+                            ({categoryItems.length})
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Category Items Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-0">
+                      {categoryItems.map((item, index) => (
+                        <InstagramGridCard
+                          key={item.id}
+                          item={item}
+                          onSelect={setSelectedItem}
+                          isEager={index < 9}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()
             )}
           </main>
         )}
