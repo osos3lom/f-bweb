@@ -15,6 +15,8 @@ import { ItemModal } from "@/components/menu/item-modal";
 import { AboutSectionDesktop } from "@/components/home/about-section";
 import { getItemName, getItemDesc, getCategoryName, formatCurrency } from "@/lib/i18n-helpers";
 
+import { BackgroundVideo } from "@/components/ui/background-video";
+
 export function DesktopHome() {
   const { lang, t } = useLang();
   const { cart, addToCart } = useCart();
@@ -34,15 +36,10 @@ export function DesktopHome() {
       {/* Clean Full-Screen Hero Video Background */}
       <section id="home" className="relative w-full h-screen min-h-screen overflow-hidden flex items-center justify-center bg-[#1C120D]">
         {/* Clean Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
+        <BackgroundVideo
+          src={getAssetPath("/brand/hero-bg.mp4")}
           className="absolute inset-0 w-full h-full object-cover scale-100 opacity-100"
-        >
-          <source src={getAssetPath("/brand/hero-bg.mp4")} type="video/mp4" />
-        </video>
+        />
 
         {/* Minimal gradient overlays for legibility */}
         <div

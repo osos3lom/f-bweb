@@ -101,7 +101,7 @@ export default function InfoPage() {
         <div className="flex items-center justify-center gap-6 pt-2">
           {[
             { icon: <Instagram size={20} />, label: "@bitrina.sa", href: "https://instagram.com/bitrina.sa" },
-            { icon: <Globe size={20} />, label: "bitrina.sa", href: "https://bitrina.sa" },
+            { icon: <Globe size={20} />, label: "osos3lom.github.io/f-bweb", href: "https://osos3lom.github.io/f-bweb" },
           ].map((s) => (
             <a
               key={s.label}

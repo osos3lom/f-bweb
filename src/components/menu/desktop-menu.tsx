@@ -82,7 +82,7 @@ export function DesktopMenu() {
                 </div>
                 <div>
                   <h1 className="font-playfair font-extrabold text-lg text-white tracking-wide leading-tight">
-                    bitrina.sa
+                    Bitrina
                   </h1>
                   <span className="text-[10px] text-[#D4A359] font-medium block">
                     {ar ? "قائمة بترينا الرقمية" : "Bitrina Digital Menu"}

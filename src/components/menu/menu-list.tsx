@@ -169,7 +169,7 @@ export function MenuList() {
                   <div className="flex flex-col">
                     <div className="flex items-center gap-1">
                       <span className="font-playfair font-extrabold text-sm text-white drop-shadow-md">
-                        bitrina.sa
+                        Bitrina
                       </span>
                       <Sparkles size={12} className="text-[#D4A359] fill-[#D4A359]" />
                     </div>

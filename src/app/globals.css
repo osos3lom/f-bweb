@@ -5,7 +5,7 @@
 
 @font-face {
   font-family: 'Azahar';
-  src: url('/fonts/azahar-al-tn-trial-demi.ttf') format('truetype');
+  src: url('../../public/fonts/azahar-al-tn-trial-demi.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

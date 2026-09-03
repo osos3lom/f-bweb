@@ -5,21 +5,18 @@ import { Logo } from "@/components/layout/logo";
 import { useLang } from "@/providers/app-provider";
 import { getAssetPath } from "@/lib/utils";
 
+import { BackgroundVideo } from "@/components/ui/background-video";
+
 export function HeroSection() {
   const { toggleLang, t } = useLang();
 
   return (
     <section className="relative w-full h-screen min-h-screen overflow-hidden flex flex-col justify-between bg-[#1C120D]">
       {/* Clean Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
+      <BackgroundVideo
+        src={getAssetPath("/brand/hero-bg.mp4")}
         className="absolute inset-0 w-full h-full object-cover scale-100 opacity-100"
-      >
-        <source src={getAssetPath("/brand/hero-bg.mp4")} type="video/mp4" />
-      </video>
+      />
 
       {/* Subtle top gradient for header legibility */}
       <div

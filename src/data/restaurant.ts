@@ -13,6 +13,6 @@ export const RESTAURANT: Restaurant = {
   social: {
     instagram: "https://instagram.com/bitrina.sa",
     facebook: "https://facebook.com/bitrina.sa",
-    website: "https://bitrina.sa",
+    website: "https://osos3lom.github.io/f-bweb",
   },
 };
