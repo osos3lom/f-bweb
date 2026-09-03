@@ -6,6 +6,7 @@ import { ArrowRight, MessageSquare, Sparkles, MapPin, Coffee, UtensilsCrossed } 
 import { useLang } from "@/providers/app-provider";
 import { HeroSection } from "@/components/home/hero-section";
 import { PopularPicks } from "@/components/home/popular-picks";
+import { AboutSectionMobile } from "@/components/home/about-section";
 import { DesktopHome } from "@/components/home/desktop-home";
 
 export default function HomePage() {
@@ -94,6 +95,9 @@ export default function HomePage() {
 
           {/* Popular picks section */}
           <PopularPicks />
+
+          {/* Bitrina Story: the vitrine */}
+          <AboutSectionMobile />
         </div>
       </div>
 

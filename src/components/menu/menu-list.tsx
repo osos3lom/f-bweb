@@ -11,6 +11,7 @@ import { CategoryGridCard } from "./category-grid-card";
 import { InstagramReelCard } from "./instagram-reel-card";
 import { MenuSearch } from "./menu-search";
 import { ItemModal } from "./item-modal";
+import { DesktopMenu } from "./desktop-menu";
 import { getCategoryName } from "@/lib/i18n-helpers";
 import { Grid, Sparkles, Instagram, Search, ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -125,42 +126,61 @@ export function MenuList() {
   }, [viewMode, activeReelIndex, displayItems.length, selectedItem]);
 
   return (
-    <div className="relative w-full min-h-screen bg-[#1C120D] text-white overflow-hidden select-none flex flex-col items-center justify-center">
-      {/* Background Ambient Luxury Glow */}
-      <div className="absolute inset-0 bg-radial from-[#5A3A2B]/40 via-[#251812]/80 to-[#1C120D] pointer-events-none" />
+    <>
+      {/* ── 1. Desktop & Large Screens Widescreen Menu Layout ── */}
+      <div className="hidden md:block w-full">
+        <DesktopMenu />
+      </div>
 
-      {/* Main Container Phone Canvas / Widescreen Container */}
-      <div className="relative w-full max-w-md md:max-w-md h-[100dvh] md:h-[86vh] md:max-h-[850px] md:my-auto md:rounded-3xl md:border md:border-[#D4A359]/30 md:shadow-[0_25px_80px_rgba(0,0,0,0.95)] overflow-hidden bg-[#1C120D]">
-        
-        {/* ── 1. Top Glass Header Overlay (Floating Header) ── */}
-        <header className={`absolute top-0 inset-x-0 z-30 pb-3 pt-3 px-4 transition-all ${
+      {/* ── 2. Mobile Screens Instagram Reels & Grid Canvas ── */}
+      <div className="block md:hidden relative w-full min-h-screen bg-[#1C120D] text-white overflow-hidden select-none flex flex-col items-center justify-center">
+        {/* Background Ambient Luxury Glow */}
+        <div className="absolute inset-0 bg-radial from-[#5A3A2B]/40 via-[#251812]/80 to-[#1C120D] pointer-events-none" />
+
+        {/* Main Container Phone Canvas */}
+        <div className="relative w-full h-[100dvh] overflow-hidden bg-[#1C120D]">
+          
+          {/* ── Top Glass Header Overlay (Floating Header) ── */}
+          <header className={`absolute top-0 inset-x-0 z-30 pb-3 pt-3 px-4 transition-all ${
           viewMode === "reels"
             ? "bg-gradient-to-b from-black/90 via-black/50 to-transparent"
             : "bg-[#1C120D] border-b border-[#D4A359]/30 shadow-md"
         }`}>
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              {/* Left Brand Badge */}
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#D4A359] via-[#FAF6F0] to-[#3B2319] p-0.5 shadow-md">
-                  <div className="w-full h-full rounded-full bg-[#1C120D] p-1 flex items-center justify-center border border-black">
-                    <Instagram size={14} className="text-[#D4A359]" />
+              {/* Start Header Action: Back to Categories (in Reels mode) OR Brand Badge (in Grid mode) */}
+              {viewMode === "reels" ? (
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md text-[#D4A359] border border-[#D4A359]/40 hover:bg-black/80 transition-all active:scale-95 shadow-md text-xs font-bold"
+                  aria-label={ar ? "العودة لأقسام القائمة" : "Back to Categories"}
+                  title={ar ? "العودة لأقسام القائمة" : "Back to Categories"}
+                >
+                  {ar ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
+                  <span>{ar ? "الأقسام" : "Categories"}</span>
+                </button>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#D4A359] via-[#FAF6F0] to-[#3B2319] p-0.5 shadow-md">
+                    <div className="w-full h-full rounded-full bg-[#1C120D] p-1 flex items-center justify-center border border-black">
+                      <Instagram size={14} className="text-[#D4A359]" />
+                    </div>
                   </div>
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-1">
-                    <span className="font-playfair font-extrabold text-sm text-white drop-shadow-md">
-                      bitrina.sa
+                  <div className="flex flex-col">
+                    <div className="flex items-center gap-1">
+                      <span className="font-playfair font-extrabold text-sm text-white drop-shadow-md">
+                        bitrina.sa
+                      </span>
+                      <Sparkles size={12} className="text-[#D4A359] fill-[#D4A359]" />
+                    </div>
+                    <span className="text-[10px] text-white/80 font-medium drop-shadow-md">
+                      {ar ? "قائمة بترينا الرقمية" : "Bitrina Digital Menu"}
                     </span>
-                    <Sparkles size={12} className="text-[#D4A359] fill-[#D4A359]" />
                   </div>
-                  <span className="text-[10px] text-white/80 font-medium drop-shadow-md">
-                    {ar ? "قائمة بترينا الرقمية • ريلز" : "Bitrina Reels Showcase"}
-                  </span>
                 </div>
-              </div>
+              )}
 
-              {/* Right Header Actions */}
+              {/* End Header Actions */}
               <div className="flex items-center gap-1.5">
                 {/* Search Toggle Button */}
                 <button
@@ -170,19 +190,6 @@ export function MenuList() {
                 >
                   <Search size={14} />
                 </button>
-
-                {/* Back to Categories Button (Only visible in Reels mode) */}
-                {viewMode === "reels" && (
-                  <button
-                    onClick={() => setViewMode("grid")}
-                    className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#D4A359] border border-[#D4A359]/40 hover:bg-black/80 transition-all active:scale-95 shadow-md text-xs font-bold"
-                    aria-label="Back to Categories"
-                    title={ar ? "العودة لأقسام القائمة" : "Back to Categories"}
-                  >
-                    <Grid size={13} />
-                    <span>{ar ? "الأقسام" : "Categories"}</span>
-                  </button>
-                )}
 
                 {/* Language Switcher */}
                 <button
@@ -357,6 +364,7 @@ export function MenuList() {
           }}
         />
       )}
-    </div>
+      </div>
+    </>
   );
 }

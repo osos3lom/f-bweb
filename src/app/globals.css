@@ -276,3 +276,64 @@ body.hide-mobile-nav main {
   }
 }
 
+
+/* ─── THE VITRINE (About section) ───────────────────────────────────── */
+
+/* Brass cabinet frame: warm metal bevel + deep drop shadow. */
+.vitrine-case {
+  background:
+    linear-gradient(
+      150deg,
+      rgba(243, 224, 181, 0.34) 0%,
+      rgba(184, 131, 57, 0.16) 32%,
+      rgba(28, 18, 13, 0.6) 68%,
+      rgba(212, 163, 89, 0.24) 100%
+    );
+  box-shadow:
+    0 40px 90px -30px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(212, 163, 89, 0.28),
+    inset 0 1px 0 rgba(243, 224, 181, 0.38),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.45);
+}
+
+/* Specular highlight across the glass doors. */
+.vitrine-sheen {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(255, 255, 255, 0.08) 43%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.05) 57%,
+    transparent 66%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0 0;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+
+.vitrine-case:hover .vitrine-sheen {
+  animation: vitrine-sweep 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes vitrine-sweep {
+  from { background-position: -70% 0; }
+  to { background-position: 170% 0; }
+}
+
+/* Fine film grain so the dark plate never reads as flat CSS. */
+.vitrine-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23g)'/></svg>");
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+}
+
+/* Engraved rule used under the section eyebrow. */
+.vitrine-rule {
+  background: linear-gradient(90deg, rgba(212, 163, 89, 0.85) 0%, rgba(212, 163, 89, 0.12) 60%, transparent 100%);
+}
+[dir="rtl"] .vitrine-rule {
+  background: linear-gradient(270deg, rgba(212, 163, 89, 0.85) 0%, rgba(212, 163, 89, 0.12) 60%, transparent 100%);
+}

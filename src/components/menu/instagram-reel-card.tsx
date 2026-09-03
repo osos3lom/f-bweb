@@ -162,20 +162,7 @@ export function InstagramReelCard({
         )}
       </div>
 
-      {/* ── 2. Top-Start Floating Back Arrow Button ── */}
-      {onBackToCategories && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onBackToCategories();
-          }}
-          className="absolute top-4 start-4 z-40 w-9 h-9 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-[#D4A359] flex items-center justify-center hover:bg-black/80 hover:text-white transition-all duration-200 active:scale-90 shadow-lg cursor-pointer pointer-events-auto"
-          aria-label={ar ? "العودة للأقسام" : "Back to Categories"}
-          title={ar ? "العودة للأقسام" : "Back to Categories"}
-        >
-          {ar ? <ArrowRight size={18} /> : <ArrowLeft size={18} />}
-        </button>
-      )}
+
 
       {/* ── 3. Desktop Vertical Next/Prev Arrows ── */}
       <div className="hidden md:flex flex-col gap-2 absolute right-4 top-1/2 -translate-y-1/2 z-20">

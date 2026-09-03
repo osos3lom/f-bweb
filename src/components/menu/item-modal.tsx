@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { X, Minus, Plus, ShoppingBag } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { X, Minus, Plus, ShoppingBag, Sparkles, Clock } from "lucide-react";
 import { MenuItem } from "@/types/menu";
 import { useLang } from "@/providers/app-provider";
 import { getImageUrl, isDrinkCategory } from "@/lib/utils";
@@ -17,105 +17,147 @@ export function ItemModal({
   onClose: () => void;
   onAdd: (item: MenuItem, qty: number, notes: string) => void;
 }) {
-  const { lang, t } = useLang();
+  const { lang, t, ar } = useLang();
   const [qty, setQty] = useState(1);
-  const [notes, setNotes] = useState("");
 
   const isDrink = isDrinkCategory(item.category);
 
+  // Close on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  // Prevent background scrolling while modal is open
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
-      style={{ background: "rgba(28,18,13,0.6)", backdropFilter: "blur(6px)" }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-6 bg-black/85 backdrop-blur-xl animate-in fade-in duration-300 select-none overflow-hidden"
       onClick={onClose}
     >
+      {/* ── Modal Main Card Container (Full Height Mobile & Desktop) ── */}
       <div
-        className="w-full max-w-md rounded-t-3xl md:rounded-3xl overflow-hidden bg-white shadow-2xl border border-[#E8DFC5]"
+        className="relative w-full h-[100dvh] md:h-[88vh] md:max-h-[820px] md:max-w-5xl md:rounded-3xl overflow-hidden bg-[#1C120D] text-white border-0 md:border md:border-[#D4A359]/30 md:shadow-[0_30px_100px_rgba(0,0,0,0.9)] flex flex-col md:grid md:grid-cols-12"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Image */}
-        <div className={`relative h-52 overflow-hidden ${isDrink ? "bg-[#FAF6F0] p-4" : "bg-muted"}`}>
+        {/* ─────────────────────────────────────────────────────────────
+            COLUMN 1 / MOBILE HERO: Full Height Image Showcase (Crystal Clear, No Dark Overlays)
+           ───────────────────────────────────────────────────────────── */}
+        <div className="relative w-full h-full flex-1 md:h-full md:col-span-7 overflow-hidden bg-[#150D09] group">
+          {/* Crystal Clear Hero Image - Zero Dark Overlays */}
           <img
-            src={getImageUrl(item.photo, 500, 300)}
+            src={getImageUrl(item.photo, 900, 1000)}
             alt={getItemName(item, lang)}
-            className={`w-full h-full ${isDrink ? "object-contain object-center" : "object-cover"}`}
+            className={`w-full h-full ${
+              isDrink
+                ? "object-contain object-center p-8 md:p-12 transition-transform duration-700 group-hover:scale-105"
+                : "object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            }`}
           />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(to top, rgba(255,255,255,0.6) 0%, transparent 50%)" }}
-          />
-          <button
-            onClick={onClose}
-            className="absolute top-4 end-4 rtl:left-4 rtl:right-auto w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all active:scale-95 bg-white/90"
-          >
-            <X size={16} className="text-[#3B2319]" />
-          </button>
-          {item.badge && (
-            <div className="absolute top-4 start-4 rtl:right-4 rtl:left-auto">
-              <Badge type={item.badge} />
+
+          {/* Floating Header Actions (Top Left / Right) */}
+          <div className="absolute top-4 inset-x-4 flex items-center justify-between z-20">
+            {/* Badge Tag */}
+            <div>
+              {item.badge && <Badge type={item.badge} />}
             </div>
-          )}
+
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center shadow-lg transition-all hover:bg-black/80 active:scale-90 cursor-pointer"
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          {/* Floating Price Tag on Image */}
+          <div className="absolute bottom-6 start-6 z-20 flex items-center gap-2">
+            <div className="px-4 py-2 rounded-2xl bg-[#1C120D]/90 backdrop-blur-md border border-[#D4A359]/40 shadow-2xl flex items-center gap-2">
+              <Sparkles size={14} className="text-[#D4A359] animate-pulse" />
+              <span className="font-poppins font-extrabold text-lg text-[#D4A359]">
+                {formatCurrency(item.price, lang)}
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="px-5 py-5">
-          <div className="flex items-start justify-between gap-3 mb-2">
-            <h2 className="font-playfair font-bold text-[#3B2319] text-xl flex-1">
-              {getItemName(item, lang)}
-            </h2>
-            <span className="font-poppins font-bold text-xl shrink-0 text-[#D4A359]">
-              {formatCurrency(item.price, lang)}
-            </span>
-          </div>
-          <p className="font-poppins text-sm text-[#9E8675] leading-relaxed mb-5">
-            {getItemDesc(item, lang)}
-          </p>
-
-          {/* Qty stepper */}
-          <div className="flex items-center justify-between mb-4">
-            <span className="font-poppins text-sm font-medium text-[#2B1D16]">
-              {t("cart.qty")}
-            </span>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setQty(Math.max(1, qty - 1))}
-                className="w-9 h-9 rounded-full border-2 border-[#3B2319] text-[#3B2319] flex items-center justify-center transition-all active:scale-90"
-              >
-                <Minus size={14} />
-              </button>
-              <span className="font-poppins font-bold text-[#2B1D16] text-lg w-6 text-center">
-                {qty}
-              </span>
-              <button
-                onClick={() => setQty(qty + 1)}
-                className="w-9 h-9 rounded-full gradient-espresso-lounge text-white flex items-center justify-center transition-all active:scale-90"
-              >
-                <Plus size={14} />
-              </button>
+        {/* ─────────────────────────────────────────────────────────────
+            COLUMN 2 / MOBILE SHEET: Customization & Cart Action
+           ───────────────────────────────────────────────────────────── */}
+        <div className="relative w-full md:h-full md:col-span-5 flex flex-col bg-[#1C120D] text-white border-t md:border-t-0 md:border-s border-[#D4A359]/25 shadow-2xl overflow-hidden max-h-[55vh] md:max-h-full">
+          {/* Scrollable Content Body */}
+          <div className="flex-1 overflow-y-auto p-6 md:p-8 space-y-6 scrollbar-none">
+            {/* Header: Title & Subtitle */}
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-xs font-semibold text-[#D4A359] uppercase tracking-wider">
+                <span>{item.category.toUpperCase()}</span>
+                <span>•</span>
+                <span className="flex items-center gap-1 text-white/70">
+                  <Clock size={12} /> 5-10 {ar ? "دقائق" : "mins"}
+                </span>
+              </div>
+              <h2 className="font-playfair text-2xl md:text-3xl font-extrabold text-white leading-tight">
+                {getItemName(item, lang)}
+              </h2>
+              <p className="font-poppins text-xs md:text-sm text-[#C4B1A0] leading-relaxed">
+                {getItemDesc(item, lang)}
+              </p>
             </div>
           </div>
 
-          {/* Notes */}
-          <textarea
-            className="w-full rounded-xl px-3.5 py-3 font-poppins text-sm text-[#2B1D16] resize-none outline-none mb-5 border border-[#E8DFC5] bg-[#F2ECE4]/60"
-            style={{ minHeight: 72 }}
-            placeholder={t("cart.notes")}
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-          />
+          {/* Sticky Bottom Action Dock Bar */}
+          <div className="p-5 md:p-6 bg-[#150D09] border-t border-[#D4A359]/30 space-y-4 shadow-2xl">
+            {/* Quantity Stepper Row */}
+            <div className="flex items-center justify-between">
+              <span className="font-poppins text-xs font-bold text-white/80 uppercase tracking-wider">
+                {t("cart.qty")}
+              </span>
+              <div className="flex items-center gap-4 bg-[#261B15] border border-[#D4A359]/30 rounded-full px-3 py-1.5">
+                <button
+                  onClick={() => setQty(Math.max(1, qty - 1))}
+                  disabled={qty <= 1}
+                  className="w-8 h-8 rounded-full border border-[#D4A359]/40 text-[#D4A359] flex items-center justify-center transition-all active:scale-90 disabled:opacity-40 disabled:pointer-events-none hover:bg-[#D4A359]/10 cursor-pointer"
+                >
+                  <Minus size={14} />
+                </button>
+                <span className="font-poppins font-extrabold text-white text-base w-6 text-center">
+                  {qty}
+                </span>
+                <button
+                  onClick={() => setQty(qty + 1)}
+                  className="w-8 h-8 rounded-full bg-[#D4A359] text-[#1C120D] flex items-center justify-center transition-all active:scale-90 hover:bg-[#e4b56c] font-bold shadow-md cursor-pointer"
+                >
+                  <Plus size={14} />
+                </button>
+              </div>
+            </div>
 
-          {/* Add button */}
-          <button
-            onClick={() => {
-              onAdd(item, qty, notes);
-              onClose();
-            }}
-            className="w-full py-4 rounded-2xl font-poppins font-semibold text-white text-base flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg gradient-espresso-lounge"
-          >
-            <ShoppingBag size={17} />
-            {t("cart.add")} —{" "}
-            <span className="text-[#D4A359]">{formatCurrency(item.price * qty, lang)}</span>
-          </button>
+            {/* Primary Call to Action Button */}
+            <button
+              onClick={() => {
+                onAdd(item, qty, "");
+                onClose();
+              }}
+              className="w-full py-4 rounded-2xl font-poppins font-extrabold text-[#1C120D] text-base flex items-center justify-center gap-3 transition-all active:scale-98 shadow-xl bg-gradient-to-r from-[#F3E0B5] via-[#D4A359] to-[#B88339] hover:brightness-110 cursor-pointer"
+            >
+              <ShoppingBag size={19} className="text-[#1C120D]" />
+              <span>{t("cart.add")} —</span>
+              <span className="text-[#1C120D] font-extrabold">
+                {formatCurrency(item.price * qty, lang)}
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -15,6 +15,10 @@ export function DesktopHeader() {
   const { toggleLang, t } = useLang();
   const [cartOpen, setCartOpen] = useState(false);
 
+  if (pathname === "/menu" || pathname?.startsWith("/menu")) {
+    return null;
+  }
+
   const isHome = pathname === "/" || pathname === "";
 
   const handleNavClick = (sectionId: string) => {

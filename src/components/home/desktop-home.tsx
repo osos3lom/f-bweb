@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import {
-  Search, X, Plus, MapPin, Clock, Coffee, Tag
+  Search, X, Plus, Coffee, Tag
 } from "lucide-react";
 import { MENU } from "@/data/menu";
 import { CATEGORIES } from "@/data/categories";
@@ -12,6 +12,7 @@ import { useCart, useLang } from "@/providers/app-provider";
 import { getImageUrl, getAssetPath, isDrinkCategory } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ItemModal } from "@/components/menu/item-modal";
+import { AboutSectionDesktop } from "@/components/home/about-section";
 import { getItemName, getItemDesc, getCategoryName, formatCurrency } from "@/lib/i18n-helpers";
 
 export function DesktopHome() {
@@ -210,101 +211,8 @@ export function DesktopHome() {
         </div>
       </section>
 
-      {/* Bitrina Story Section with Main Exterior Image */}
-      <section id="about" className="py-20 gradient-espresso-lounge text-white relative overflow-hidden">
-        <div className="site-container">
-          <div className="grid grid-cols-2 gap-16 items-center mb-16">
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-[.22em] text-[#D4A359] mb-3">
-                {t("about.title")}
-              </div>
-              <h2 className="font-playfair text-4xl font-bold leading-tight mb-6 gradient-text-gold">
-                {t("about.heading")}
-              </h2>
-              <p className="text-white/85 leading-relaxed text-sm mb-4">
-                {t("about.p1")}
-              </p>
-              <p className="text-white/75 leading-relaxed text-sm mb-8 whitespace-pre-line">
-                {t("about.p2")}
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="p-4 rounded-2xl bg-white/10 border border-white/15">
-                  <Clock size={20} className="text-[#D4A359] mb-2" />
-                  <h4 className="font-semibold text-sm">{t("info.opening_hours")}</h4>
-                  <p className="text-xs text-white/75 mt-1">{t("info.daily_hours")}</p>
-                </div>
-                <div className="p-4 rounded-2xl bg-white/10 border border-white/15">
-                  <MapPin size={20} className="text-[#D4A359] mb-2" />
-                  <h4 className="font-semibold text-sm">{t("info.location_title")}</h4>
-                  <p className="text-xs text-white/75 mt-1">{t("info.location_address")}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Main Store Exterior Image in Story */}
-            <div className="relative">
-              <div className="rounded-3xl overflow-hidden border-4 border-white/20 shadow-2xl">
-                <img
-                  src={getAssetPath("/brand/exterior.jpg")}
-                  alt="Bitrina Coffee Exterior Facade & Lounge"
-                  className="w-full h-[480px] object-cover"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Venue Photography Showcase */}
-          <div className="grid grid-cols-3 gap-6 pt-6 border-t border-white/15">
-            <div className="rounded-2xl overflow-hidden border border-white/15 bg-white/5 p-3">
-              <div className="h-56 rounded-xl overflow-hidden mb-3">
-                <img
-                  src={getAssetPath("/brand/exterior.jpg")}
-                  alt="Bitrina Main Facade & Signboard"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-              <h4 className="font-playfair font-bold text-base text-[#D4A359]">
-                {lang === "ar" ? "الواجهة الرئيسية واللاونج" : "Exterior Facade & Lounge"}
-              </h4>
-              <p className="text-xs text-white/70 mt-1">
-                {lang === "ar" ? "شعار بترينا المضيء مع أقواس الخيزران الخضراء" : "Bitrina's 3D illuminated logo and sage-green lattice arches"}
-              </p>
-            </div>
-
-            <div className="rounded-2xl overflow-hidden border border-white/15 bg-white/5 p-3">
-              <div className="h-56 rounded-xl overflow-hidden mb-3">
-                <img
-                  src={getAssetPath("/brand/interior-fountain.jpg")}
-                  alt="Bitrina Indoor Lounge & Water Fountain"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-              <h4 className="font-playfair font-bold text-base text-[#D4A359]">
-                {lang === "ar" ? "نافورة اللاونج الداخلية" : "Fountain Indoor Lounge"}
-              </h4>
-              <p className="text-xs text-white/70 mt-1">
-                {lang === "ar" ? "أجواء دافئة حول النافورة الحجرية مع الإضاءة الذهبية" : "Charming stone water fountain surrounded by floral chairs"}
-              </p>
-            </div>
-
-            <div className="rounded-2xl overflow-hidden border border-white/15 bg-white/5 p-3">
-              <div className="h-56 rounded-xl overflow-hidden mb-3">
-                <img
-                  src={getAssetPath("/brand/outdoor-lounge.jpg")}
-                  alt="Bitrina Outdoor Terrace Lounge"
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </div>
-              <h4 className="font-playfair font-bold text-base text-[#D4A359]">
-                {lang === "ar" ? "التراس والجلسات الخارجية" : "Outdoor Terrace Lounge"}
-              </h4>
-              <p className="text-xs text-white/70 mt-1">
-                {lang === "ar" ? "جلسات في الهواء الطلق محاطة بالأشجار والنباتات الخضراء" : "Open-air dining under botanical hanging greenery"}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Bitrina Story: the vitrine */}
+      <AboutSectionDesktop />
 
       {/* Selected Item Modal */}
       {selectedItem && (
