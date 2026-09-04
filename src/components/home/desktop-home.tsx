@@ -16,6 +16,7 @@ import { AboutSectionDesktop } from "@/components/home/about-section";
 import { getItemName, getItemDesc, getCategoryName, formatCurrency } from "@/lib/i18n-helpers";
 
 import { BackgroundVideo } from "@/components/ui/background-video";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 export function DesktopHome() {
   const { lang, t } = useLang();
@@ -38,6 +39,7 @@ export function DesktopHome() {
         {/* Clean Background Video */}
         <BackgroundVideo
           src={getAssetPath("/brand/hero-bg.mp4")}
+          poster={getAssetPath("/brand/hero-poster.webp")}
           className="absolute inset-0 w-full h-full object-cover scale-100 opacity-100"
         />
 
@@ -63,9 +65,10 @@ export function DesktopHome() {
 
           {/* Official Calligraphic Logo Emblem replacing text block */}
           <div className="my-6 mx-auto max-w-md transition-transform hover:scale-105">
-            <img
-              src={getAssetPath("/brand/logo.png")}
+            <OptimizedImage
+              src={getAssetPath("/brand/logo.webp")}
               alt="قهوة بترينا - Bitrina Logo"
+              priority
               className="w-full h-auto object-contain mx-auto drop-shadow-[0_12px_30px_rgba(0,0,0,0.65)]"
             />
           </div>
@@ -160,7 +163,7 @@ export function DesktopHome() {
               >
                 <div>
                   <div className={`h-44 overflow-hidden relative ${isDrink ? "bg-[#FAF6F0] p-4" : "bg-muted"}`}>
-                    <img
+                    <OptimizedImage
                       src={getImageUrl(item.photo, 400, 300)}
                       alt={getItemName(item, lang)}
                       className={`w-full h-full ${isDrink ? "object-contain object-center" : "object-cover"}`}

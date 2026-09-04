@@ -6,6 +6,7 @@ import { useLang } from "@/providers/app-provider";
 import { getImageUrl } from "@/lib/utils";
 import { getCategoryName } from "@/lib/i18n-helpers";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 export function CategoryGridCard({
   category,
@@ -30,11 +31,10 @@ export function CategoryGridCard({
       className="relative aspect-square w-full rounded-none overflow-hidden bg-[#1C120D] border border-white/10 cursor-pointer group shadow-xs transition-transform active:scale-95"
     >
       {/* Background Image with Zoom on Hover */}
-      <img
+      <OptimizedImage
         src={photoUrl}
         alt={getCategoryName(category, lang)}
         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-80"
-        loading="lazy"
       />
 
       {/* Luxury Dark Overlay */}

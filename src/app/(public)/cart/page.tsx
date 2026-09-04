@@ -87,6 +87,8 @@ export default function CartPage() {
               <img
                 src={getImageUrl(ci.item.photo, 64, 64)}
                 alt={ar ? ci.item.nameAr : ci.item.name}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>

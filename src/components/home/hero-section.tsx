@@ -6,6 +6,7 @@ import { useLang } from "@/providers/app-provider";
 import { getAssetPath } from "@/lib/utils";
 
 import { BackgroundVideo } from "@/components/ui/background-video";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 export function HeroSection() {
   const { toggleLang, t } = useLang();
@@ -15,6 +16,7 @@ export function HeroSection() {
       {/* Clean Video Background */}
       <BackgroundVideo
         src={getAssetPath("/brand/hero-bg.mp4")}
+        poster={getAssetPath("/brand/hero-poster.webp")}
         className="absolute inset-0 w-full h-full object-cover scale-100 opacity-100"
       />
 
@@ -49,9 +51,10 @@ export function HeroSection() {
       {/* Centered Cover / Logo Emblem */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 pb-12 text-center">
         <div className="max-w-[280px] w-full transition-transform hover:scale-105">
-          <img
-            src={getAssetPath("/brand/logo.png")}
+          <OptimizedImage
+            src={getAssetPath("/brand/logo.webp")}
             alt="قهوة بترينا - Bitrina Logo"
+            priority
             className="w-full h-auto object-contain drop-shadow-[0_12px_30px_rgba(0,0,0,0.65)]"
           />
         </div>

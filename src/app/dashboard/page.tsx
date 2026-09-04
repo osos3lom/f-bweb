@@ -113,6 +113,8 @@ export default function DashboardOverviewPage() {
                   <img
                     src={getImageUrl(item.photo, 40, 40)}
                     alt={item.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                 </div>

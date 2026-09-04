@@ -21,6 +21,7 @@ import { getImageUrl, isDrinkCategory } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { ItemModal } from "./item-modal";
 import { CartDrawer } from "@/components/cart/cart-drawer";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 import {
   getItemName,
   getItemDesc,
@@ -267,7 +268,7 @@ export function DesktopMenu() {
                           <div>
                             {/* Card Image Container */}
                             <div className="h-48 overflow-hidden relative bg-[#180E0A]">
-                              <img
+                              <OptimizedImage
                                 src={getImageUrl(item.photo, 400, 300)}
                                 alt={getItemName(item, lang)}
                                 className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
@@ -385,7 +386,7 @@ export function DesktopMenu() {
                       key={cartItem.item.id}
                       className="flex items-center gap-3 p-3 rounded-2xl bg-[#1C120D] border border-[#D4A359]/15"
                     >
-                      <img
+                      <OptimizedImage
                         src={getImageUrl(cartItem.item.photo, 80, 80)}
                         alt={getItemName(cartItem.item, lang)}
                         className="w-14 h-14 rounded-xl object-cover shrink-0 border border-[#D4A359]/20"

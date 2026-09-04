@@ -146,6 +146,9 @@ export function InstagramReelCard({
             isDrink ? "object-contain p-6 md:p-10 drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)] z-10" : "object-cover"
           }`}
           loading={isEager ? "eager" : "lazy"}
+          decoding="async"
+          // @ts-ignore
+          fetchpriority={isEager ? "high" : "auto"}
         />
 
         {/* Double Tap Heart Popup */}

@@ -7,6 +7,7 @@ import { MENU } from "@/data/menu";
 import { useLang } from "@/providers/app-provider";
 import { getImageUrl, isDrinkCategory } from "@/lib/utils";
 import { getItemName, formatCurrency } from "@/lib/i18n-helpers";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 export function PopularPicks() {
   const { lang, t, ar } = useLang();
@@ -41,7 +42,7 @@ export function PopularPicks() {
         className="flex gap-4 overflow-x-auto pb-4 pt-1 -mx-5 px-5 scrollbar-none"
         style={{ scrollbarWidth: "none" }}
       >
-        {popularItems.map((item) => {
+        {popularItems.map((item, index) => {
           const isDrink = isDrinkCategory(item.category);
           const badgeText = getLocalizedBadge(item.badge);
 
@@ -52,13 +53,13 @@ export function PopularPicks() {
               className="shrink-0 w-44 rounded-2xl overflow-hidden border border-[#E8DFC5] bg-white shadow-[0_10px_25px_rgba(59,35,25,0.06)] hover:shadow-[0_15px_35px_rgba(59,35,25,0.12)] hover:border-[#D4A359]/60 transition-all duration-300 active:scale-95 flex flex-col justify-between group"
             >
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#FAF6F0]">
-                <img
+                <OptimizedImage
                   src={getImageUrl(item.photo, 240, 180)}
                   alt={getItemName(item, lang)}
                   className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
                     isDrink ? "object-contain p-3" : "object-cover"
                   }`}
-                  loading="lazy"
+                  priority={index < 2}
                 />
                 {badgeText && (
                   <span className="absolute top-2.5 start-2.5 text-[10px] font-black px-2.5 py-0.5 rounded-full bg-[#1C120D]/90 backdrop-blur-md text-[#D4A359] border border-[#D4A359]/40 shadow-sm">

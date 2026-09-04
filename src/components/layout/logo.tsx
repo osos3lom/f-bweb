@@ -10,10 +10,13 @@ export function BitrinaIcon({
 }) {
   return (
     <img
-      src={getAssetPath("/brand/logo.png")}
+      src={getAssetPath("/brand/logo_thumb.webp")}
       alt="قهوة بترينا - Bitrina Logo"
       width={size}
       height={size}
+      decoding="async"
+      // @ts-ignore
+      fetchpriority="high"
       className={`object-contain ${className}`}
     />
   );
@@ -33,8 +36,11 @@ export function Logo({
         style={{ width: compact ? 42 : 52, height: compact ? 42 : 52 }}
       >
         <img
-          src={getAssetPath("/brand/logo.png")}
+          src={getAssetPath("/brand/logo_thumb.webp")}
           alt="قهوة بترينا - Bitrina"
+          decoding="async"
+          // @ts-ignore
+          fetchpriority="high"
           className="w-full h-full object-contain"
         />
       </div>

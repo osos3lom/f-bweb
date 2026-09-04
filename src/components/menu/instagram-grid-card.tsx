@@ -6,6 +6,7 @@ import { MenuItem } from "@/types/menu";
 import { useLang, useCart } from "@/providers/app-provider";
 import { getImageUrl, isDrinkCategory } from "@/lib/utils";
 import { getItemName, formatCurrency } from "@/lib/i18n-helpers";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 export function InstagramGridCard({
   item,
@@ -26,13 +27,13 @@ export function InstagramGridCard({
       onClick={() => onSelect(item)}
       className="relative aspect-square w-full rounded-none overflow-hidden bg-[#FAF6F0] border border-[#E8DFC5]/60 cursor-pointer group shadow-xs transition-transform active:scale-95"
     >
-      <img
+      <OptimizedImage
         src={getImageUrl(item.photo, 200, 200)}
         alt={getItemName(item, lang)}
         className={`w-full h-full transition-transform duration-500 group-hover:scale-110 ${
           isDrink ? "object-contain p-2" : "object-cover"
         }`}
-        loading={isEager ? "eager" : "lazy"}
+        priority={isEager}
       />
 
       {/* Grid Item Overlay Info */}

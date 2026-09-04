@@ -15,8 +15,10 @@ export default function InfoPage() {
       {/* Hero */}
       <div className="relative h-48 md:h-64 gradient-espresso-lounge overflow-hidden">
         <img
-          src={getAssetPath("/brand/interior-fountain.jpg")}
+          src={getAssetPath("/brand/interior-fountain.webp")}
           alt="Bitrina Café & Lounge Interior Fountain"
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover opacity-75 mix-blend-overlay"
         />
         <div

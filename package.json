@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node node_modules/next/dist/bin/next dev",
     "build": "node node_modules/next/dist/bin/next build",
-    "start": "node node_modules/next/dist/bin/next start"
+    "start": "node node_modules/next/dist/bin/next start",
+    "optimize-images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.4",

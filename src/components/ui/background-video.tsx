@@ -5,9 +5,10 @@ import React, { useEffect, useRef } from "react";
 interface BackgroundVideoProps {
   src: string;
   className?: string;
+  poster?: string;
 }
 
-export function BackgroundVideo({ src, className }: BackgroundVideoProps) {
+export function BackgroundVideo({ src, className, poster }: BackgroundVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -59,7 +60,8 @@ export function BackgroundVideo({ src, className }: BackgroundVideoProps) {
       playsInline
       // @ts-ignore
       webkit-playsinline="true"
-      preload="auto"
+      preload="metadata"
+      poster={poster}
       aria-hidden="true"
       className={className || "absolute inset-0 w-full h-full object-cover scale-100 opacity-100"}
     >

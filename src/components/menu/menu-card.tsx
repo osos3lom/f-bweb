@@ -7,6 +7,7 @@ import { useLang, useCart } from "@/providers/app-provider";
 import { getImageUrl, isDrinkCategory } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { getItemName, getItemDesc, formatCurrency } from "@/lib/i18n-helpers";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 export function MenuCard({
   item,
@@ -29,11 +30,11 @@ export function MenuCard({
       onClick={() => onSelect(item)}
     >
       <div className={`w-28 h-28 shrink-0 overflow-hidden ${isDrink ? "bg-[#FAF6F0] p-2" : "bg-muted"}`}>
-        <img
+        <OptimizedImage
           src={getImageUrl(item.photo, 112, 112)}
           alt={getItemName(item, lang)}
           className={`w-full h-full ${isDrink ? "object-contain object-center" : "object-cover"}`}
-          loading={isEager ? "eager" : "lazy"}
+          priority={isEager}
         />
       </div>
       <div className="flex-1 py-3 px-3 flex flex-col justify-between min-w-0">

@@ -15,9 +15,9 @@ const MAPS_URL =
  * its subject rather than on ceiling or floor.
  */
 const SHELVES: { img: string; name: TranslationKey; note: TranslationKey; pos: string }[] = [
-  { img: "/brand/mirror-arch.jpg", name: "about.shelf1_name", note: "about.shelf1_note", pos: "center 35%" },
-  { img: "/brand/interior-fountain.jpg", name: "about.shelf2_name", note: "about.shelf2_note", pos: "center 78%" },
-  { img: "/brand/outdoor-lounge.jpg", name: "about.shelf3_name", note: "about.shelf3_note", pos: "center 45%" },
+  { img: "/brand/mirror-arch.webp", name: "about.shelf1_name", note: "about.shelf1_note", pos: "center 35%" },
+  { img: "/brand/interior-fountain.webp", name: "about.shelf2_name", note: "about.shelf2_note", pos: "center 78%" },
+  { img: "/brand/outdoor-lounge.webp", name: "about.shelf3_name", note: "about.shelf3_note", pos: "center 45%" },
 ];
 
 const WHATSAPP_NUMBER = "966590393906";
@@ -176,9 +176,11 @@ function Backdrop() {
   return (
     <>
       <img
-        src={getAssetPath("/brand/exterior.jpg")}
+        src={getAssetPath("/brand/exterior.webp")}
         alt=""
         aria-hidden
+        loading="lazy"
+        decoding="async"
         className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover opacity-[0.15] blur-[2px]"
       />
       <div
@@ -205,6 +207,8 @@ function Shelf({ index }: { index: number }) {
         src={getAssetPath(shelf.img)}
         alt=""
         aria-hidden
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 h-full w-full object-cover saturate-[.8] brightness-[.7] transition-[transform,filter] duration-[900ms] ease-out group-hover:scale-[1.06] group-hover:saturate-100 group-hover:brightness-95"
         style={{ objectPosition: shelf.pos }}
       />
@@ -367,6 +371,8 @@ export function AboutSectionMobile() {
                   src={getAssetPath(shelf.img)}
                   alt=""
                   aria-hidden
+                  loading="lazy"
+                  decoding="async"
                   className="absolute inset-0 h-full w-full object-cover saturate-[.85] brightness-[.72]"
                   style={{ objectPosition: shelf.pos }}
                 />

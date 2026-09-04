@@ -7,6 +7,7 @@ import { useLang } from "@/providers/app-provider";
 import { getImageUrl, isDrinkCategory } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { getItemName, getItemDesc, formatCurrency } from "@/lib/i18n-helpers";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 export function ItemModal({
   item,
@@ -54,9 +55,10 @@ export function ItemModal({
             ───────────────────────────────────────────────────────────── */}
         <div className="relative w-full h-full flex-1 md:h-full md:col-span-7 overflow-hidden bg-[#150D09] group">
           {/* Crystal Clear Hero Image - Zero Dark Overlays */}
-          <img
+          <OptimizedImage
             src={getImageUrl(item.photo, 900, 1000)}
             alt={getItemName(item, lang)}
+            priority
             className={`w-full h-full ${
               isDrink
                 ? "object-contain object-center p-8 md:p-12 transition-transform duration-700 group-hover:scale-105"

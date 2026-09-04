@@ -79,9 +79,15 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#1C120D" />
         <link rel="icon" href={getAssetPath("/favicon.ico")} sizes="any" />
-        <link rel="icon" type="image/png" href={getAssetPath("/brand/logo.png")} />
-        <link rel="apple-touch-icon" href={getAssetPath("/brand/logo.png")} />
+        <link rel="icon" type="image/png" href={getAssetPath("/brand/logo_thumb.webp")} />
+        <link rel="apple-touch-icon" href={getAssetPath("/brand/logo_thumb.webp")} />
         <link rel="shortcut icon" href={getAssetPath("/favicon.ico")} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap"
+        />
       </head>
       <body className="min-h-full bg-background text-foreground antialiased font-poppins">
         <AppProvider>{children}</AppProvider>

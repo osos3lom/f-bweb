@@ -5,6 +5,7 @@ import { X, ShoppingBag, Trash2, Minus, Plus, Phone } from "lucide-react";
 import { useCart, useLang } from "@/providers/app-provider";
 import { getImageUrl } from "@/lib/utils";
 import { getItemName, formatCurrency } from "@/lib/i18n-helpers";
+import { OptimizedImage } from "@/components/ui/optimized-image";
 
 export function CartDrawer({ onClose }: { onClose: () => void }) {
   const { cart, updateQty, removeItem, cartTotal } = useCart();
@@ -20,27 +21,27 @@ export function CartDrawer({ onClose }: { onClose: () => void }) {
         onClick={(event) => event.stopPropagation()}
       >
         <div>
-          <div className="flex items-center justify-between">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-[#D4A359]">
+          <div className="flex items-center justify-between border-b border-[#E8DFC5] pb-5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#D4A359]/20 flex items-center justify-center text-[#D4A359]">
+                <ShoppingBag size={20} />
+              </div>
+              <h2 className="font-playfair text-xl font-bold text-[#3B2319]">
                 {t("cart.title")}
-              </span>
-              <h2 className="font-playfair text-3xl font-bold text-[#3B2319]">
-                {t("cart.total")}
               </h2>
             </div>
             <button
               onClick={onClose}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-sm border border-[#E8DFC5] text-[#3B2319]"
+              className="rounded-full p-2 text-muted-foreground hover:bg-[#E8DFC5]/50 transition-colors"
             >
-              <X size={18} />
+              <X size={20} />
             </button>
           </div>
 
           {cart.length === 0 ? (
-            <div className="py-24 text-center">
-              <ShoppingBag className="mx-auto text-[#D4A359]/60" size={42} />
-              <p className="mt-4 text-sm text-[#9E8675]">
+            <div className="py-20 text-center">
+              <ShoppingBag size={48} className="mx-auto text-muted-foreground/40 mb-4" />
+              <p className="font-poppins text-sm text-muted-foreground font-medium">
                 {t("cart.empty")}
               </p>
             </div>
@@ -51,7 +52,7 @@ export function CartDrawer({ onClose }: { onClose: () => void }) {
                   key={entry.item.id}
                   className="flex gap-3 rounded-2xl border border-[#E8DFC5] bg-white p-3 shadow-xs"
                 >
-                  <img
+                  <OptimizedImage
                     src={getImageUrl(entry.item.photo, 90, 90)}
                     alt={getItemName(entry.item, lang)}
                     className="h-20 w-20 rounded-xl object-cover"

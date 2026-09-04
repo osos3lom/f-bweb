@@ -21,6 +21,15 @@ export function getAssetPath(path?: string): string {
 export function getImageUrl(photoId: string, w = 400, h = 300): string {
   if (!photoId) return "";
   if (photoId.startsWith("/")) {
+    const isMenuOrBrand = photoId.startsWith("/menu-images/") || photoId.startsWith("/brand/");
+    if (isMenuOrBrand) {
+      // Strip any existing extension (.jpg, .png, .webp) and _thumb suffix
+      const cleanPath = photoId.replace(/\.(jpe?g|png|webp)$/i, "").replace(/_thumb$/, "");
+      if (w <= 360) {
+        return getAssetPath(`${cleanPath}_thumb.webp`);
+      }
+      return getAssetPath(`${cleanPath}.webp`);
+    }
     return getAssetPath(photoId);
   }
   return `https://images.unsplash.com/${photoId}?w=${w}&h=${h}&fit=crop&auto=format&q=80`;
