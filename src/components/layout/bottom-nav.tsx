@@ -33,7 +33,7 @@ export function BottomNav() {
   ];
 
   return (
-    <div className="mobile-bottom-nav md:hidden fixed bottom-4 left-4 right-4 z-40 max-w-md mx-auto pointer-events-none">
+    <div className="mobile-bottom-nav md:hidden fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-4 right-4 z-40 max-w-md mx-auto pointer-events-none">
       <nav
         className="pointer-events-auto flex items-center justify-around px-2 py-2 rounded-full border border-white/70 shadow-[0_12px_40px_rgba(59,35,25,0.18)] transition-all duration-300 gradient-vitrine-glass"
       >

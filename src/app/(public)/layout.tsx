@@ -18,10 +18,15 @@ export default function PublicLayout({
   React.useEffect(() => {
     if (isMenu) {
       document.body.style.backgroundColor = "#1C120D";
+      document.documentElement.style.backgroundColor = "#1C120D";
+    } else if (isHome) {
+      document.body.style.backgroundColor = "";
+      document.documentElement.style.backgroundColor = "#1C120D";
     } else {
       document.body.style.backgroundColor = "";
+      document.documentElement.style.backgroundColor = "#FAF6F0";
     }
-  }, [isMenu]);
+  }, [isMenu, isHome]);
 
   return (
     <div className={`min-h-screen flex flex-col ${isMenu ? "bg-[#1C120D]" : "bg-[#FAF6F0]"}`}>

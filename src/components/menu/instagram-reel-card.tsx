@@ -124,7 +124,7 @@ export function InstagramReelCard({
   return (
     <article
       data-reel-id={item.id}
-      className="relative w-full h-full snap-start snap-always overflow-hidden bg-[#1C120D] text-white select-none"
+      className="relative w-full h-screen h-[100vh] min-h-[100vh] snap-start snap-always overflow-hidden bg-[#1C120D] text-white select-none flex-shrink-0 [touch-action:pan-y]"
     >
       {/* ── 1. Full Screen Media Backdrop ── */}
       <div
@@ -187,7 +187,7 @@ export function InstagramReelCard({
       </div>
 
       {/* ── 4. Right Side Action Bar (Like & Details Icons) ── */}
-      <div className="absolute right-3 bottom-52 md:bottom-44 z-30 flex flex-col items-center gap-4 pointer-events-auto">
+      <div className="absolute right-3 bottom-[calc(13rem+env(safe-area-inset-bottom,0px))] md:bottom-44 z-30 flex flex-col items-center gap-4 pointer-events-auto">
         {/* 1. Like Button */}
         <div className="flex flex-col items-center gap-0.5">
           <button
@@ -220,7 +220,7 @@ export function InstagramReelCard({
       </div>
 
       {/* ── 5. Bottom Overlay (Caption, Title, Description, CTA Banner) ── */}
-      <div className="absolute bottom-0 inset-x-0 z-20 px-4 pb-4 md:pb-6 pt-12 space-y-2.5 pointer-events-auto bg-gradient-to-t from-black/70 via-black/25 to-transparent">
+      <div className="absolute bottom-0 inset-x-0 z-20 px-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] md:pb-6 pt-16 space-y-2.5 pointer-events-auto bg-gradient-to-t from-black/80 via-black/35 to-transparent">
         {/* Handle Header */}
         <div className="flex items-center gap-2">
           <span className="font-poppins font-bold text-xs text-white tracking-wide flex items-center gap-1 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">

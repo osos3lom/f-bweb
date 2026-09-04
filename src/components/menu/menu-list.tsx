@@ -133,17 +133,17 @@ export function MenuList() {
       </div>
 
       {/* ── 2. Mobile Screens Instagram Reels & Grid Canvas ── */}
-      <div className="block md:hidden relative w-full min-h-screen bg-[#1C120D] text-white overflow-hidden select-none flex flex-col items-center justify-center">
+      <div className="block md:hidden relative w-full h-screen h-[100vh] bg-[#1C120D] text-white overflow-hidden select-none flex flex-col items-center justify-center">
         {/* Background Ambient Luxury Glow */}
         <div className="absolute inset-0 bg-radial from-[#5A3A2B]/40 via-[#251812]/80 to-[#1C120D] pointer-events-none" />
 
         {/* Main Container Phone Canvas */}
-        <div className="relative w-full h-[100dvh] overflow-hidden bg-[#1C120D]">
+        <div className="relative w-full h-screen h-[100vh] overflow-hidden bg-[#1C120D]">
           
           {/* ── Top Glass Header Overlay (Floating Header) ── */}
-          <header className={`absolute top-0 inset-x-0 z-30 pb-3 pt-3 px-4 transition-all ${
+          <header className={`absolute top-0 inset-x-0 z-30 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top,0px))] px-4 transition-all ${
           viewMode === "reels"
-            ? "bg-gradient-to-b from-black/90 via-black/50 to-transparent"
+            ? "bg-gradient-to-b from-black/95 via-black/60 to-transparent"
             : "bg-[#1C120D] border-b border-[#D4A359]/30 shadow-md"
         }`}>
           <div className="flex flex-col gap-2">
@@ -227,7 +227,7 @@ export function MenuList() {
             ref={containerRef}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
-            className="w-full h-full snap-y snap-mandatory scroll-smooth overflow-y-auto scrollbar-none"
+            className="w-full h-full snap-y snap-mandatory scroll-smooth overflow-y-auto scrollbar-none overscroll-y-contain [touch-action:pan-y] [-webkit-overflow-scrolling:touch]"
           >
             {displayItems.length > 0 ? (
               displayItems.map((item, idx) => (
@@ -258,7 +258,8 @@ export function MenuList() {
         ) : (
           /* Grid Scrollable View */
           <main
-            className="w-full h-full pt-20 pb-24 overflow-y-auto bg-[#FAF6F0] text-[#2B1D16] px-0"
+            className="w-full h-full pt-[calc(5.5rem+env(safe-area-inset-top,0px))] pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] overflow-y-auto bg-[#FAF6F0] text-[#2B1D16] px-0"
+            style={{ WebkitOverflowScrolling: "touch" }}
           >
             {allSearched && (
               <div className="font-poppins text-xs font-medium text-[#8C6D58] mb-4 px-4">

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { AppProvider } from "@/providers/app-provider";
 import { getAssetPath } from "@/lib/utils";
@@ -12,11 +12,23 @@ const azaharFont = localFont({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://osos3lom.github.io/f-bweb";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#1C120D",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Bitrina | بترينا — Coffee & Dining Showcase",
   description:
     "Bitrina Café & Lounge in Al Zahra, Jeddah. Coffee, artisanal vitrine pastries, tarwiqa breakfast, oriental grills & dining lounge.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Bitrina",
+  },
   openGraph: {
     title: "Bitrina | بترينا — Coffee & Dining Showcase",
     description: "Bitrina Café & Lounge in Al Zahra, Jeddah, Saudi Arabia.",
@@ -60,8 +72,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`h-full ${azaharFont.variable}`}>
+    <html lang="en" className={`h-full ${azaharFont.variable} bg-[#1C120D]`}>
       <head>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="theme-color" content="#1C120D" />
         <link rel="icon" href={getAssetPath("/favicon.ico")} sizes="any" />
         <link rel="icon" type="image/png" href={getAssetPath("/brand/logo.png")} />
         <link rel="apple-touch-icon" href={getAssetPath("/brand/logo.png")} />

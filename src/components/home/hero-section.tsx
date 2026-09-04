@@ -20,9 +20,9 @@ export function HeroSection() {
 
       {/* Subtle top gradient for header legibility */}
       <div
-        className="absolute inset-x-0 top-0 h-32 z-0 pointer-events-none"
+        className="absolute inset-x-0 top-0 h-[calc(8rem+env(safe-area-inset-top,0px))] z-0 pointer-events-none"
         style={{
-          background: "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, transparent 100%)",
+          background: "linear-gradient(180deg, rgba(0,0,0,0.65) 0%, transparent 100%)",
         }}
       />
 
@@ -35,7 +35,7 @@ export function HeroSection() {
       />
 
       {/* Top bar */}
-      <div className="relative z-10 flex items-center justify-between px-5 pt-8">
+      <div className="relative z-10 flex items-center justify-between px-5 pt-[calc(1.5rem+env(safe-area-inset-top,0px))]">
         <Logo light />
         <button
           onClick={toggleLang}

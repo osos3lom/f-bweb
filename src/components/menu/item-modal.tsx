@@ -46,12 +46,12 @@ export function ItemModal({
     >
       {/* ── Modal Main Card Container (Full Height Mobile & Desktop) ── */}
       <div
-        className="relative w-full h-[100dvh] md:h-[88vh] md:max-h-[820px] md:max-w-5xl md:rounded-3xl overflow-hidden bg-[#1C120D] text-white border-0 md:border md:border-[#D4A359]/30 md:shadow-[0_30px_100px_rgba(0,0,0,0.9)] flex flex-col md:grid md:grid-cols-12"
+        className="relative w-full h-screen h-[100vh] md:h-[88vh] md:max-h-[820px] md:max-w-5xl md:rounded-3xl overflow-hidden bg-[#1C120D] text-white border-0 md:border md:border-[#D4A359]/30 md:shadow-[0_30px_100px_rgba(0,0,0,0.9)] flex flex-col md:grid md:grid-cols-12"
         onClick={(e) => e.stopPropagation()}
       >
         {/* ─────────────────────────────────────────────────────────────
             COLUMN 1 / MOBILE HERO: Full Height Image Showcase (Crystal Clear, No Dark Overlays)
-           ───────────────────────────────────────────────────────────── */}
+            ───────────────────────────────────────────────────────────── */}
         <div className="relative w-full h-full flex-1 md:h-full md:col-span-7 overflow-hidden bg-[#150D09] group">
           {/* Crystal Clear Hero Image - Zero Dark Overlays */}
           <img
@@ -65,7 +65,7 @@ export function ItemModal({
           />
 
           {/* Floating Header Actions (Top Left / Right) */}
-          <div className="absolute top-4 inset-x-4 flex items-center justify-between z-20">
+          <div className="absolute top-[calc(1rem+env(safe-area-inset-top,0px))] inset-x-4 flex items-center justify-between z-20">
             {/* Badge Tag */}
             <div>
               {item.badge && <Badge type={item.badge} />}
@@ -117,7 +117,7 @@ export function ItemModal({
           </div>
 
           {/* Sticky Bottom Action Dock Bar */}
-          <div className="p-5 md:p-6 bg-[#150D09] border-t border-[#D4A359]/30 space-y-4 shadow-2xl">
+          <div className="p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom,0px))] md:p-6 bg-[#150D09] border-t border-[#D4A359]/30 space-y-4 shadow-2xl">
             {/* Quantity Stepper Row */}
             <div className="flex items-center justify-between">
               <span className="font-poppins text-xs font-bold text-white/80 uppercase tracking-wider">

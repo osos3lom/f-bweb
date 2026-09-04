@@ -14,6 +14,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
   --font-size: 16px;
   --background: #FAF6F0;
   --foreground: #2B1D16;
@@ -171,7 +175,17 @@
   }
 
   html, body, #root {
-    min-height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: #1C120D;
+    -webkit-text-size-adjust: 100%;
+    font-size: var(--font-size);
   }
 
   body {
@@ -258,6 +272,26 @@ body.hide-mobile-nav .mobile-bottom-nav {
 
 body.hide-mobile-nav main {
   padding-bottom: 0 !important;
+}
+
+/* ─── IOS SAFE AREA UTILITIES ─── */
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pl-safe {
+  padding-left: env(safe-area-inset-left, 0px);
+}
+.pr-safe {
+  padding-right: env(safe-area-inset-right, 0px);
+}
+.top-safe {
+  top: env(safe-area-inset-top, 0px);
+}
+.bottom-safe {
+  bottom: env(safe-area-inset-bottom, 0px);
 }
 
 @keyframes marquee {
